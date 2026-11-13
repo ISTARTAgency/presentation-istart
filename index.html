@@ -242,7 +242,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;f
                 <li><b>Le prix</b>Sur devis. Selon votre situation, votre OPCO peut prendre en charge la formation : on regarde ça avec vous.</li>
               </ul>
             </details>
-            <div class="actions"><a class="btn clair" href="#contact">En parler avec nous</a></div>
+            <div class="actions"><a class="btn clair" href="mailto:contact@istartagency.fr?subject=Formation%20sur%20mesure%20%C3%A0%20l%27IA&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20en%20savoir%20plus%20sur%20une%20formation%20sur%20mesure%20%C3%A0%20l%27IA%20pour%20mon%20entreprise.%0A%0ANombre%20de%20personnes%20%C3%A0%20former%20%3A%20%0ACe%20que%20nous%20aimerions%20apprendre%20%3A%20%0A%0AMon%20entreprise%20%3A%20%0AMon%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%2C%0A">En parler avec nous</a></div>
           </article>
         </div>
       </div>
@@ -282,7 +282,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;f
           </details>
           <div class="bas">
             <p class="surmesure"><span aria-hidden="true">✂️</span> <span><b>Ce ne sont que des exemples.</b> Tout est fait sur mesure : on construit l'outil autour de votre entreprise, de vos tâches et de votre façon de travailler.</span></p>
-            <a class="btn" href="#contact">Parler de mon projet</a>
+            <a class="btn" id="mail-projet" href="mailto:contact@istartagency.fr?subject=Mon%20projet%20d%27outil%20sur%20mesure&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20parler%20d%27un%20outil%20sur%20mesure%20pour%20mon%20entreprise.%0A%0ALa%20t%C3%A2che%20que%20j%27aimerais%20automatiser%20%3A%20%0A%0AMon%20entreprise%20%3A%20%0AMon%20t%C3%A9l%C3%A9phone%20%3A%20%0A%0AMerci%2C%0A">Parler de mon projet</a>
           </div>
         </div>
       </div>
@@ -354,6 +354,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;f
     });
   });
   rejouer();
+  var noms={mails:"trier mes mails",devis:"préparer mes devis",cr:"rédiger mes comptes rendus",prospects:"suivre mes prospects"};
+  var lien=document.getElementById('mail-projet'),choisi=false;
+  document.querySelectorAll('.taches button').forEach(function(b){b.addEventListener('click',function(){choisi=true;majLien();});});
+  function majLien(){
+    var corps="Bonjour,\n\nJe souhaite parler d'un outil sur mesure pour mon entreprise.\n\nLa tâche que j'aimerais automatiser : "+(choisi?noms[actuel]+" (ou autre chose : )":"")+"\n\nMon entreprise : \nMon téléphone : \n\nMerci,\n";
+    lien.href="mailto:contact@istartagency.fr?subject="+encodeURIComponent("Mon projet d'outil sur mesure")+"&body="+encodeURIComponent(corps);
+  }
 
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target);}});},{threshold:.15});
